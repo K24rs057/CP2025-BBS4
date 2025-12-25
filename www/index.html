@@ -428,6 +428,7 @@ function register(email, password,nickname) {
     .then(() => {//すべて成功
         showMessage('アカウントを作成しました');
         clearAuthForm();
+        $('#loginNickname').val('');
     })
     .catch((error) => {
         showMessage(getAuthErrorMessage(error), 'error');
@@ -492,7 +493,6 @@ $(function() {
     // 投稿処理
     $('#postButton').on('click', () => {
         // 投稿内容をフォームから取得
-        const authorVal = $('#authorInput').val();
         const contentVal = $('#contentInput').val();
         createPost(authorVal, contentVal);
     });
