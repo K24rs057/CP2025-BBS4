@@ -421,8 +421,8 @@ function register(email, password) {
 
     firebase.auth().createUserWithEmailAndPassword(email, password)
     .then((result) => {//ニックネームをfirebaseに登録
-        return resul.user.updateProfile({
-            displayName: nickname;
+        return result.user.updateProfile({
+            displayName: nickname
         })
     })
     .then(() => {//すべて成功
@@ -506,7 +506,8 @@ $(function() {
     $('#registerButton').on('click', () => {
         const email = $('#loginEmail').val();
         const password = $('#loginPassword').val();
-        register(email, password);
+        const nickname = $('#loginNickname').val();
+        register(email, password,nickname);
     });
 
     $('#logoutButton').on('click', logout);
