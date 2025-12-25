@@ -409,13 +409,23 @@ function login(email, password) {
 
 // 新規登録処理
 function register(email, password) {
+    if (!nickname || !nickname.trim()) {//空じゃないかチェック
+        showMessage('ニックネームを入力してください','error');
+        return;
+    }
     if (!validateAuthInput(email, password, true)) return;
 
+    //ボタンの連打を禁止
     const button = $('#registerButton');
     button.prop('disabled', true);
 
     firebase.auth().createUserWithEmailAndPassword(email, password)
-    .then(() => {
+    .then((result) => {//ニックネームをfirebaseに登録
+        return resul.user.updateProfile({
+            displayName: nickname;
+        })
+    })
+    .then(() => {//すべて成功
         showMessage('アカウントを作成しました');
         clearAuthForm();
     })
